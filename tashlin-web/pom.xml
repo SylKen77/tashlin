@@ -5,17 +5,18 @@
   <parent>
     <artifactId>tashlin</artifactId>
     <groupId>be.optis</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>be.optis.tashlin</groupId>
+  <groupId>be.optis.tashlin.web</groupId>
   <artifactId>tashlin-web</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <name>tashlin-web</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+  <packaging>war</packaging>
   <dependencies>
+  	<dependency>
+	  	<artifactId>tashlin-core</artifactId>
+	    <groupId>be.optis.tashlin.core</groupId>
+	    <version>${project.version}</version>
+  	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
