@@ -5,6 +5,11 @@
 <tiles-definitions>
 
     <definition name="main" template="/WEB-INF/layouts/main.jsp" />
+    <definition name="anonymous" template="/WEB-INF/layouts/anonymous.jsp" />
+      
+    <definition name=".login" extends="anonymous">
+        <put-attribute name="page" value="/WEB-INF/jsp/login.jsp"/>
+    </definition>  
       
     <definition name=".jobs" extends="main">
         <put-attribute name="page" value="/WEB-INF/jsp/jobs.jsp"/>

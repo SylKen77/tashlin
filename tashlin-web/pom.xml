@@ -29,17 +29,6 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.10</version>
 			</plugin>
-			<plugin>
-				<groupId>org.cloudfoundry</groupId>
-				<artifactId>cf-maven-plugin</artifactId>
-				<version>1.0.0.M1</version>
-				<configuration>
-					<server>mycloudfoundry-instance</server>
-					<target>http://api.cloudfoundry.com</target>
-					<url>tashlin.cloudfoundry.com</url>
-					<memory>256</memory>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
@@ -52,7 +41,22 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>3.1.0.RELEASE</version>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tiles</groupId>

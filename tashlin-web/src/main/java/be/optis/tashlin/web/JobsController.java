@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class JobsController {
 
-	@RequestMapping(value = "/jobs.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/jobs", method = RequestMethod.GET)
 	public String view() {
 		return ".jobs";
 	}
