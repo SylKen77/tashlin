@@ -8,7 +8,12 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/tashlin.css" />" />
 	</head>
 	<body>
-		Main layout:
+		<div id="hd">
+			
+			<a href="#">Jobs</a>
+			<a href="#">Settings</a>
+		</div>
+		
 		<tiles:insertAttribute name="page" />
 	</body>
 </html>

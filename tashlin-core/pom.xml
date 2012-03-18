@@ -7,15 +7,14 @@
     <groupId>be.optis</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>be.optis.tashlin.core</groupId>
+  <groupId>be.optis.tashlin</groupId>
   <artifactId>tashlin-core</artifactId>
   <name>tashlin-core</name>
-  <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

@@ -11,7 +11,7 @@
 	<security:http auto-config="true">
 		<security:intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
-		<security:form-login login-page='/login' default-target-url="/jobs" always-use-default-target="true" />
+		<security:form-login login-page='/login' default-target-url="/" always-use-default-target="true" />
 	</security:http>
 
 	<security:authentication-manager>
