@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>tashlin</artifactId>
 		<groupId>be.optis</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 	<groupId>be.optis.tashlin</groupId>
 	<artifactId>tashlin-test</artifactId>

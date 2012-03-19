@@ -11,8 +11,12 @@
         <put-attribute name="page" value="/WEB-INF/jsp/login.jsp"/>
     </definition>  
       
-    <definition name=".jobs" extends="main">
-        <put-attribute name="page" value="/WEB-INF/jsp/jobs.jsp"/>
+    <definition name=".jobs.overview" extends="main">
+        <put-attribute name="page" value="/WEB-INF/jsp/jobs/overview.jsp"/>
+    </definition>
+    
+    <definition name=".jobs.detail" extends="main">
+        <put-attribute name="page" value="/WEB-INF/jsp/jobs/detail.jsp"/>
     </definition>
 
 </tiles-definitions>

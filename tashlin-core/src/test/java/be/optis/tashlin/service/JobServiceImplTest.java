@@ -2,7 +2,7 @@ package be.optis.tashlin.service;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,10 +20,16 @@ public class JobServiceImplTest {
 	}
 	
 	@Test
-	public void testGetJobs() {
-		List<Job> jobs = service.getJobs();
+	public void getJobs() {
+		Set<Job> jobs = service.getJobs();
 		assertEquals(1, jobs.size());
-		assertEquals("Job1", jobs.get(0).getName());
+		assertEquals("Job1", jobs.iterator().next().getName());
+	}
+	
+	@Test
+	public void getJobById() {
+		Job job = service.getJob(1L);
+		assertEquals("Job1", job.getName());
 	}
 	
 }
