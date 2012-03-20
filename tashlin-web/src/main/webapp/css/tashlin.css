@@ -1,9 +1,12 @@
-body {
-	margin: 0;
-	padding: 0;
-	font-family: Arial,sans-serif;
-    font-size: 14px;
-	color: #333;
-}
+html, body, ul, li {margin: 0; body: 0;}
 
-#hd {background: #000;}
+body {font: 13px/1.5 "Helvetica Neue", sans-serif; color: #333;}
+a { text-decoration: none; color: #0066aa;}
+a:hover { text-decoration: underline; }
+h1, h2, h3 { font-weight: 300; color: black; }
+h1 { font-size: 26px; line-height: 26px; margin: 18px 0 2px 0; }
+h2 { font-size: 18px; line-height: 22px; margin: 14px 0 8px 0; }
+h3 { font-size: 14px; line-height: 18px; margin: 13px 0 6px 0; }
+
+#hd {background: #000; height: 45px;}
+#hd a {color: #cccccc; font-weight: bold;}

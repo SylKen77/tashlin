@@ -13,14 +13,6 @@
 	<name>tashlin-web</name>
 	<packaging>war</packaging>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>repository.springframework.maven.milestone</id>
-			<name>Spring Framework Maven Milestone Repository</name>
-			<url>http://maven.springframework.org/milestone</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<build>
 		<finalName>tashlin</finalName>
 		<plugins>

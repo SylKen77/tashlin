@@ -8,15 +8,27 @@
     <definition name="anonymous" template="/WEB-INF/layouts/anonymous.jsp" />
       
     <definition name=".login" extends="anonymous">
-        <put-attribute name="page" value="/WEB-INF/jsp/login.jsp"/>
+        <put-attribute name="page" value="/WEB-INF/jsp/login.jsp" />
     </definition>  
       
     <definition name=".jobs.overview" extends="main">
-        <put-attribute name="page" value="/WEB-INF/jsp/jobs/overview.jsp"/>
+    	<put-attribute name="title" value="jobs.title" />
+        <put-attribute name="page" value="/WEB-INF/jsp/jobs/overview.jsp" />
     </definition>
     
-    <definition name=".jobs.detail" extends="main">
-        <put-attribute name="page" value="/WEB-INF/jsp/jobs/detail.jsp"/>
+    <definition name=".settings.overview" extends="main">
+    	<put-attribute name="title" value="settings.title" />
+        <put-attribute name="page" value="/WEB-INF/jsp/settings/overview.jsp" />
+    </definition>
+    
+    <definition name=".views.plugins" extends="main">
+    	<put-attribute name="title" value="plugins.title" />
+        <put-attribute name="page" value="/WEB-INF/jsp/plugins/overview.jsp" />
+    </definition>
+    
+    <definition name=".views.overview" extends="main">
+    	<put-attribute name="title" value="views.title" />
+        <put-attribute name="page" value="/WEB-INF/jsp/views/overview.jsp" />
     </definition>
 
 </tiles-definitions>

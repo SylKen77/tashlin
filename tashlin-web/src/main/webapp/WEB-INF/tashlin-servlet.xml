@@ -13,7 +13,13 @@
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/resources/**" location="/" />
 	<mvc:view-controller path="/login" view-name=".login" />
-
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="WEB-INF/i18n/messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+		
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<property name="definitions">
