@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@RequestMapping(value= "/plugins")
 public class PluginsController {
 
-	@RequestMapping(value= "/plugins")
 	public String showPlugins() {
 		return ".plugins.overview";
 	}
