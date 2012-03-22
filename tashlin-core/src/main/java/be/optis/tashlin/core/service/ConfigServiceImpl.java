@@ -1,5 +1,7 @@
 package be.optis.tashlin.core.service;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +16,18 @@ public class ConfigServiceImpl implements ConfigService {
 	@Autowired private ConfigDao configDao;
 	
 	public void save(Config config) {
-		configDao.save(config);
+		try {
+			configDao.save(config);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public GlobalSettings getGlobalSettings() {
-		Config config = configDao.getConfig();
+		Config config;
+		try {
+			config = configDao.getConfig();
+		
 		if(config == null) {
 			config = new Config();
 			
@@ -29,7 +38,13 @@ public class ConfigServiceImpl implements ConfigService {
 			colors.setSuccess("#333333");
 			globalSettings.setColors(colors);
 		}
+		
 		return config.getGlobalSettings();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

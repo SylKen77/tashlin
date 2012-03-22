@@ -1,5 +1,8 @@
 package be.optis.tashlin.core.model;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 public class Colors {
 
 	private String success;
@@ -12,6 +15,14 @@ public class Colors {
 		this.success = success;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
 	
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}	
 	
 }

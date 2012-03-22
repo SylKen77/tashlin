@@ -22,7 +22,7 @@ public class ConfigServiceImplTest extends AbstractUnitTest {
 	}
 	
 	@Test
-	public void save() {
+	public void save() throws Exception {
 		Config config = new Config();
 		service.save(config);
 		verify(configDao).save(config);
