@@ -7,6 +7,10 @@ public class Colors {
 
 	private String success;
 	
+	public Colors() {
+		this.success = "green";
+	}
+	
 	public String getSuccess() {
 		return success;
 	}

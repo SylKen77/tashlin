@@ -2,10 +2,10 @@ package be.optis.tashlin.core.dao;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,27 +16,36 @@ import be.optis.tashlin.test.AbstractIntegrationTest;
 public class XmlConfigDaoIntegrationTest extends AbstractIntegrationTest {
 
 	private XmlConfigDao dao;
-	private static final String TEST_XML_FILE = "src/test/resources/config.xml";
+	private Config config;
+	private static final File TEST_XML_FILE = new File("src/test/resources/config.xml");
+	private static final File TEST_TEMP_XML_FILE = new File("target/config-temp.xml");
 
+	
 	@Before
 	public void setUp() {
+		config = new ConfigBuilder().mock().andReturn();
 		dao = new XmlConfigDao(TEST_XML_FILE);
 	}
 	
 	@Test
 	public void getConfig() throws Exception {
-		Config expected = new ConfigBuilder().mock().andReturn();
-		Config actual = dao.getConfig();
-		assertEquals(expected, actual);
+		assertEquals(config, dao.getConfig());
 	}
 
 	@Test
 	public void save() throws Exception {
-		String expected = FileUtils.readFileToString(new File(TEST_XML_FILE));
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		Config config = new ConfigBuilder().mock().andReturn();
-		dao.save(config, baos);
-		assertEquals(expected, baos.toString());
+		dao = new XmlConfigDao(TEST_TEMP_XML_FILE);
+		dao.save(config);
+		String expected = FileUtils.readFileToString(TEST_XML_FILE);
+		String actual = FileUtils.readFileToString(TEST_TEMP_XML_FILE);
+		assertEquals(expected, actual);
 	}
+	
+	@After
+	public void tearDown() {
+		TEST_TEMP_XML_FILE.delete();
+		
+	}
+	
 
 }

@@ -6,6 +6,11 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class Config {
 
 	private GlobalSettings globalSettings;
+	
+	public Config() {
+		this.globalSettings = new GlobalSettings();
+
+	}
 
 	public GlobalSettings getGlobalSettings() {
 		return globalSettings;

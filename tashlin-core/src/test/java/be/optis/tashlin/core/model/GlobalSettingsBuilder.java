@@ -16,6 +16,11 @@ public class GlobalSettingsBuilder {
 		return this;
 	}
 	
+	public GlobalSettingsBuilder initialMock() {
+		globalSettings = new GlobalSettings();
+		return this;
+	}
+	
 	public GlobalSettings andReturn() {
 		return globalSettings;
 	}

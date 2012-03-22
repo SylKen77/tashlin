@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import be.optis.tashlin.core.model.Colors;
 import be.optis.tashlin.core.model.GlobalSettings;
 import be.optis.tashlin.core.service.ConfigService;
 

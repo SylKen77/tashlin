@@ -6,6 +6,9 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class GlobalSettings {
 
 	private Colors colors;
+	
+	public GlobalSettings() {
+		this.colors = new Colors();	}
 
 	public Colors getColors() {
 		return colors;
