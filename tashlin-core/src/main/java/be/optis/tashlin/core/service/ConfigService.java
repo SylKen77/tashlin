@@ -6,7 +6,7 @@ import be.optis.tashlin.core.model.GlobalSettings;
 
 public interface ConfigService {
 
-	void save(Config config) throws ServiceException;
+	void save(GlobalSettings globalSettings) throws ServiceException;
 	
 	GlobalSettings getGlobalSettings() throws ServiceException;
 	

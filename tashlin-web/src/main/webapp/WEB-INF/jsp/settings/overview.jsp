@@ -7,10 +7,9 @@
 <h1><spring:message code="settings.title" /></h1>
 
 
-<form:form  commandName="settings">
-	<h2><spring:message code="settings.colors.title" /></h2>
-	<spring:message code="settings.colors.label.success" />
-	<form:input path="colors.success" />
+<form:form  commandName="globalSettings">
+	<spring:message code="settings.mavenHome.label" />
+	<form:input path="mavenHome" />
 
 	<input type="submit" value="<spring:message code="button.save" />" />
 	

@@ -1,6 +1,7 @@
 package be.optis.tashlin.core.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -55,14 +56,14 @@ public class ConfigServiceImplTest extends AbstractUnitTest {
 	
 	@Test
 	public void save() throws Exception {
-		service.save(config);
-		verify(configDao).save(config);
+		service.save(config.getGlobalSettings());
+		verify(configDao).save(any(Config.class));
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void saveButFileIsLocked() throws Exception {
 		doThrow(new FileLockInterruptionException()).when(configDao).save(config);
-		service.save(config);
+		service.save(config.getGlobalSettings());
 	}
 	
 }

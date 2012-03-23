@@ -6,6 +6,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class GlobalSettings {
 
 	private Colors colors;
+	private String mavenHome;
 	
 	public GlobalSettings() {
 		this.colors = new Colors();	}
@@ -17,7 +18,15 @@ public class GlobalSettings {
 	public void setColors(Colors colors) {
 		this.colors = colors;
 	}
-	
+		
+	public String getMavenHome() {
+		return mavenHome;
+	}
+
+	public void setMavenHome(String mavenHome) {
+		this.mavenHome = mavenHome;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj);

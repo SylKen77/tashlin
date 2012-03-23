@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.web.servlet.view.RedirectView;
 
 import be.optis.tashlin.core.model.Colors;
 import be.optis.tashlin.core.model.GlobalSettings;
@@ -35,7 +36,7 @@ public class SettingsControllerTest extends AbstractUnitTest {
 	public void save() {
 		GlobalSettings settings = new GlobalSettings();
 		settings.setColors(new Colors());
-		assertEquals("redirect:/jobs", controller.save(settings));
+		assertEquals("/jobs", controller.save(settings).getUrl());
 	}
 	
 }

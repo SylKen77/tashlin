@@ -14,8 +14,14 @@ import be.optis.tashlin.core.model.GlobalSettings;
 public class ConfigServiceImpl implements ConfigService {
 
 	@Autowired private ConfigDao configDao;
+	private Config config;
 	
-	public void save(Config config) {
+	public void save(GlobalSettings globalSettings) {
+		if(config == null) {
+			config = new Config();
+		}
+		config.setGlobalSettings(globalSettings);
+		
 		try {
 			configDao.save(config);
 		} catch (IOException e) {
