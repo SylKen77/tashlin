@@ -8,7 +8,7 @@
 		<c:set var="title"><tiles:getAsString name="title" /></c:set>
 		<title><spring:message code="${title}" /> - Tashlin</title>
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/tashlin.css" />" />
-		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/grids.css" />" />
+		<script src="<c:url value="/resources/js/jquery-1.7.2.min.js" />"/></script>
 	</head>
 	<body>
 	<div id="hd">
@@ -17,12 +17,7 @@
 	      <a href="<c:url value="/settings" />"><spring:message code="settings.title" /></a>
 	  </div>
 	</div>
-	
-
-		
 	<tiles:insertAttribute name="page" />
-				
-		
 	</body>
 </html>
 
