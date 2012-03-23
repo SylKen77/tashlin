@@ -35,33 +35,33 @@ public class ConfigServiceImplTest extends AbstractUnitTest {
 	}
 	
 	@Test
-	public void getGlobalSettings() throws Exception {
+	public void testGetGlobalSettings() throws Exception {
 		when(configDao.getConfig()).thenReturn(new ConfigBuilder().mock().andReturn());
 		GlobalSettings expected = new GlobalSettingsBuilder().mock().andReturn();
 		assertEquals(expected, service.getGlobalSettings());
 	}
 	
 	@Test
-	public void getGlobalSettingsWhenConfigDoesNotExist() throws Exception {
+	public void testGetGlobalSettingsWhenConfigDoesNotExist() throws Exception {
 		when(configDao.getConfig()).thenReturn(null);
 		GlobalSettings expected = new GlobalSettings();
 		assertEquals(expected, service.getGlobalSettings());
 	}
 	
 	@Test(expected=ServiceException.class)
-	public void getGlobalSettingButFileIsLocked() throws Exception {
+	public void testGetGlobalSettingButFileIsLocked() throws Exception {
 		doThrow(new FileLockInterruptionException()).when(configDao).getConfig();
 		service.getGlobalSettings();
 	}
 	
 	@Test
-	public void save() throws Exception {
+	public void testSave() throws Exception {
 		service.save(config.getGlobalSettings());
 		verify(configDao).save(any(Config.class));
 	}
 	
 	@Test(expected=ServiceException.class)
-	public void saveButFileIsLocked() throws Exception {
+	public void testSaveButFileIsLocked() throws Exception {
 		doThrow(new FileLockInterruptionException()).when(configDao).save(config);
 		service.save(config.getGlobalSettings());
 	}

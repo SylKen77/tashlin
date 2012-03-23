@@ -8,6 +8,8 @@
            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
+    <bean name="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
+
 	<bean id="xmlConfig" class="java.io.File">
 		<constructor-arg value="src/main/resources/config.xml"/>
 	</bean>

@@ -1,6 +1,6 @@
 package be.optis.tashlin.core.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +17,7 @@ public class GlobalSettingsTest {
 	@Test
 	public void testDefaultValues() {
 		assertEquals(new Colors(), globalSettings.getColors());
+		assertNull(globalSettings.getMavenHome());
 	}
 	
 	@Test

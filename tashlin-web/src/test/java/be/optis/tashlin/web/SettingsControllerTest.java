@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.springframework.web.servlet.view.RedirectView;
 
 import be.optis.tashlin.core.model.Colors;
 import be.optis.tashlin.core.model.GlobalSettings;

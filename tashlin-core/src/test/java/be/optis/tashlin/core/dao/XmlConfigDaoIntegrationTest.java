@@ -28,12 +28,12 @@ public class XmlConfigDaoIntegrationTest extends AbstractIntegrationTest {
 	}
 	
 	@Test
-	public void getConfig() throws Exception {
+	public void testGetConfig() throws Exception {
 		assertEquals(config, dao.getConfig());
 	}
 
 	@Test
-	public void save() throws Exception {
+	public void testSave() throws Exception {
 		dao = new XmlConfigDao(TEST_TEMP_XML_FILE);
 		dao.save(config);
 		String expected = FileUtils.readFileToString(TEST_XML_FILE);
