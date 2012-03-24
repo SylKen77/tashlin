@@ -6,9 +6,14 @@
 
     <definition name="main" template="/WEB-INF/layouts/main.jsp" />  
       
-    <definition name=".jobs.overview" extends="main">
+    <definition name=".job.overview" extends="main">
     	<put-attribute name="title" value="jobs.title" />
-        <put-attribute name="page" value="/WEB-INF/jsp/jobs/overview.jsp" />
+        <put-attribute name="page" value="/WEB-INF/jsp/job/overview.jsp" />
+    </definition>
+    
+    <definition name=".job.summary" extends="main">
+    	<put-attribute name="title" value="jobs.title" />
+        <put-attribute name="page" value="/WEB-INF/jsp/job/summary.jsp" />
     </definition>
     
     <definition name=".settings.overview" extends="main">

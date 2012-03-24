@@ -1,6 +1,8 @@
 package be.optis.tashlin.core.build;
 
-public interface BuildStrategy {
+import java.io.Serializable;
+
+public interface BuildStrategy extends Serializable {
 
 	void build();
 	

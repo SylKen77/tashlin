@@ -6,8 +6,12 @@ import java.io.InputStreamReader;
 
 public class MavenBuildStrategy implements BuildStrategy {
 
+	private static final long serialVersionUID = 5677732699204575968L;
+
 	public void build() {
 		try {
+			
+			
 			String mavenHome = "D:/DEV/maven/bin";
 			String cmd = mavenHome + "/mvn.bat -f \"D:/Profiles/avdheuve/.jenkins/jobs/spring-test/workspace/pom.xml\" clean install";
 			Process pr = Runtime.getRuntime().exec(cmd);
