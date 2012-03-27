@@ -1,10 +1,12 @@
 package org.tashlin.core.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.tashlin.core.dao.ConfigurationDao;
+import org.tashlin.core.exception.ServiceException;
 import org.tashlin.core.model.Configuration;
 import org.tashlin.core.model.JobDefinition;
 
@@ -26,7 +28,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	
 	private void checkConfiguration() {
 		if(configuration == null) {
-			this.configuration = configurationDao.getConfiguration();
+			try {
+				this.configuration = configurationDao.getConfiguration();
+			} catch(IOException e) {
+				throw new ServiceException();
+			}
 		}
 	}
 

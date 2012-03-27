@@ -13,7 +13,7 @@ public class JobDefinitionBuilder {
 	}
 	
 	public JobDefinitionBuilder withName(String name) {
-		jobDefiniton.setName("tashlin-build");
+		jobDefiniton.setName(name);
 		return this;
 	}
 	

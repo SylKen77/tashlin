@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.Before;
@@ -14,8 +15,11 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.tashlin.core.builder.ConfigurationBuilder;
 import org.tashlin.core.builder.JobDefinitionBuilder;
 import org.tashlin.core.dao.ConfigurationDao;
+import org.tashlin.core.exception.ServiceException;
 import org.tashlin.core.model.Configuration;
 import org.tashlin.core.model.JobDefinition;
+
+import static org.mockito.Mockito.*;
 
 import org.tashlin.test.AbstractUnitTest;
 
@@ -35,7 +39,7 @@ public class ConfigurationServiceImplTest extends AbstractUnitTest {
 	}
 	
 	@Test
-	public void testGetJob() {
+	public void testGetJob() throws IOException {
 		Configuration configuration = configurationBuilder.mock().build();
 		when(configurationDao.getConfiguration()).thenReturn(configuration);
 		JobDefinition jobDefinition = new JobDefinitionBuilder().mock().build();
@@ -43,7 +47,7 @@ public class ConfigurationServiceImplTest extends AbstractUnitTest {
 	}
 	
 	@Test
-	public void testGetJobAndKeepConfigurationInCache() {
+	public void testGetJobAndKeepConfigurationInCache() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
 		when(configurationDao.getConfiguration()).thenReturn(configuration);
 		service.getJob("tashlin-build");
@@ -52,8 +56,14 @@ public class ConfigurationServiceImplTest extends AbstractUnitTest {
 		verifyNoMoreInteractions(configurationDao);
 	}
 	
+	@Test(expected=ServiceException.class)
+	public void testGetJobCannotRetrieveFromDao() throws Exception {
+		doThrow(new IOException()).when(configurationDao).getConfiguration();
+		service.getJob("tashlin-build");
+	}
+	
 	@Test
-	public void testGetJobs() {
+	public void testGetJobs() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
 		when(configurationDao.getConfiguration()).thenReturn(configuration);
 		List<JobDefinition> jobs = service.getJobs();
@@ -62,13 +72,19 @@ public class ConfigurationServiceImplTest extends AbstractUnitTest {
 	}
 	
 	@Test
-	public void testGetJobsAndKeepConfigurationInCache() {
+	public void testGetJobsAndKeepConfigurationInCache() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
 		when(configurationDao.getConfiguration()).thenReturn(configuration);
 		service.getJobs();
 		service.getJobs();
 		verify(configurationDao).getConfiguration();
 		verifyNoMoreInteractions(configurationDao);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testGetJobsCannotRetrieveFromDao() throws Exception {
+		doThrow(new IOException()).when(configurationDao).getConfiguration();
+		service.getJobs();
 	}
 	
 }
