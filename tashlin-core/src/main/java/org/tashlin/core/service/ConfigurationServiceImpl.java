@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.tashlin.core.dao.ConfigurationDao;
 import org.tashlin.core.exception.ServiceException;
 import org.tashlin.core.model.Configuration;
+import org.tashlin.core.model.GlobalSettings;
 import org.tashlin.core.model.JobDefinition;
 
 @Service
@@ -24,7 +25,29 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
 	public List<JobDefinition> getJobs() {
 		checkConfiguration();
-		return new ArrayList<JobDefinition>(configuration.getJobs().values());
+		if(configuration.getJobs() != null) {
+			return new ArrayList<JobDefinition>(configuration.getJobs().values());
+		}
+		return null;
+	}
+	
+	public GlobalSettings getGlobalSettings() {
+		checkConfiguration();
+		return configuration.getGlobalSettings();
+	}
+	
+	public void save(GlobalSettings globalSettings) {
+		checkConfiguration();
+		configuration.setGlobalSettings(globalSettings);
+		save(configuration);
+	}
+	
+	private void save(Configuration configuration) {
+		try {
+			configurationDao.save(configuration);
+		} catch (IOException e) {
+			throw new ServiceException();
+		}
 	}
 	
 	private void checkConfiguration() {
@@ -32,7 +55,6 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 			try {
 				this.configuration = configurationDao.getConfiguration();
 			} catch(IOException e) {
-				e.printStackTrace();
 				throw new ServiceException();
 			}
 		}

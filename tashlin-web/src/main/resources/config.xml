@@ -1,16 +1,1 @@
-<tashlin>
-  <jobs class="linked-hash-map">
-    <entry>
-      <string>tashlin-build</string>
-      <job>
-        <name>tashlin-build</name>
-      </job>
-    </entry>
-    <entry>
-      <string>tashlin-integration</string>
-      <job>
-        <name>tashlin-integration</name>
-      </job>
-    </entry>
-  </jobs>
-</tashlin>
+<tashlin />

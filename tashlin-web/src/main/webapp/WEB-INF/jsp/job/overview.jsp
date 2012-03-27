@@ -7,7 +7,7 @@
 
 <ul>
 <c:forEach var="job" items="${jobs}">
-	<li><a href="<c:url value='/job/${job.name}/summary' />">${job.name}</a></li>
+	<li><a href="<c:url value='/job/${job.key}/summary' />">${job.name}</a></li>
 </c:forEach>
 </ul>
 

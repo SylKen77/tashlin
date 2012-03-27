@@ -8,7 +8,13 @@ public class JobDefinitionBuilder {
 	
 	public JobDefinitionBuilder mock() {
 		jobDefiniton = new JobDefinition();
+		jobDefiniton.setKey("tashlin-build");
 		jobDefiniton.setName("tashlin-build");
+		return this;
+	}
+	
+	public JobDefinitionBuilder withKey(String key) {
+		jobDefiniton.setKey(key);
 		return this;
 	}
 	

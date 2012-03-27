@@ -7,7 +7,16 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Configuration {
 
+	private GlobalSettings globalSettings;
 	private Map<String, JobDefinition> jobs;
+
+	public GlobalSettings getGlobalSettings() {
+		return globalSettings;
+	}
+
+	public void setGlobalSettings(GlobalSettings globalSettings) {
+		this.globalSettings = globalSettings;
+	}
 
 	public Map<String, JobDefinition> getJobs() {
 		return jobs;

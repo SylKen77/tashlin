@@ -28,7 +28,7 @@ public class ConfigurationBuilder {
 	private void addJobs() {
 		Map<String, JobDefinition> jobs = new LinkedHashMap<String, JobDefinition>();
 		jobs.put("tashlin-build", jobDefinitionBuilder.mock().build());
-		jobs.put("tashlin-integration", jobDefinitionBuilder.mock().withName("tashlin-integration").build());
+		jobs.put("tashlin-integration", jobDefinitionBuilder.mock().withName("tashlin-integration").withKey("tashlin-integration").build());
 		configuration.setJobs(jobs);
 	}
 	

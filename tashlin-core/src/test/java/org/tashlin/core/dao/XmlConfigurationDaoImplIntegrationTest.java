@@ -1,6 +1,7 @@
 package org.tashlin.core.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
@@ -21,6 +22,15 @@ public class XmlConfigurationDaoImplIntegrationTest {
 		dao = new XmlConfigurationDao(TEST_XML_FILE);
 		Configuration configuration = dao.getConfiguration();
 		assertEquals(new ConfigurationBuilder().mock().build(), configuration);
+	}
+	
+	@Test
+	public void testGetConfigurationWhenConfigDoesNotExist() throws Exception {
+		File source = new File("target/unexisting-config.xml");
+		dao = new XmlConfigurationDao(source);
+		dao.getConfiguration();
+		assertTrue(source.exists());
+		source.delete();
 	}
 	
 	@Test

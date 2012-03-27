@@ -5,7 +5,16 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class JobDefinition {
 	
+	private String key;
 	private String name;
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
 
 	public String getName() {
 		return name;

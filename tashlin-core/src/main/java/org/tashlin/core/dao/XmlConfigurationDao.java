@@ -3,8 +3,13 @@ package org.tashlin.core.dao;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -33,6 +38,12 @@ public class XmlConfigurationDao implements ConfigurationDao {
 	}
 	
 	public Configuration getConfiguration() throws IOException {
+		if(!source.exists()) {
+			source.createNewFile();
+			InputStream cleanConfig = this.getClass().getClassLoader().getResourceAsStream("clean-config.xml");
+			OutputStream os = new FileOutputStream(source);
+			IOUtils.copy(cleanConfig, os);	
+		}
 		return (Configuration) xstream.fromXML(new FileInputStream(source));
 	}
 

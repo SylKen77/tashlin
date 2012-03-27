@@ -24,21 +24,21 @@ public class JobController {
 		return ".job.overview";
 	}
 
-	@RequestMapping(value="/job/{name}/summary", method = RequestMethod.GET)
-	public String showJobSummary(HttpServletRequest request, @PathVariable String name) {
-		request.setAttribute("job", jobService.getJob(name));
+	@RequestMapping(value="/job/{key}/summary", method = RequestMethod.GET)
+	public String showJobSummary(HttpServletRequest request, @PathVariable String key) {
+		request.setAttribute("job", jobService.getJob(key));
 		return ".job.summary";
 	}
 
-	@RequestMapping(value="/job/{name}/schedule", method = RequestMethod.GET)
-	public void schedule(HttpServletRequest request, @PathVariable String name) {
-		jobService.schedule(name);
+	@RequestMapping(value="/job/{key}/schedule", method = RequestMethod.GET)
+	public void schedule(HttpServletRequest request, @PathVariable String key) {
+		jobService.schedule(key);
 	}
 	
-	@RequestMapping(value="/job/{name}/status", method = RequestMethod.GET)
-	public @ResponseBody Map<String, String> getStatus(@PathVariable String name) {
+	@RequestMapping(value="/job/{key}/status", method = RequestMethod.GET)
+	public @ResponseBody Map<String, String> getStatus(@PathVariable String key) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("status", jobService.getStatus(name));
+		map.put("status", jobService.getStatus(key));
 		return map;
 	}
 
