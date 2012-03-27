@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.tashlin.core.model.Configuration;
@@ -19,6 +20,7 @@ public class XmlConfigurationDao implements ConfigurationDao {
 	private XStream xstream;
 	private File source;
 	
+	@Autowired
 	public XmlConfigurationDao(@Qualifier("xmlConfig") File source) {
 		this.source = source;
 		xstream = new XStream(new DomDriver("UTF-8"));
