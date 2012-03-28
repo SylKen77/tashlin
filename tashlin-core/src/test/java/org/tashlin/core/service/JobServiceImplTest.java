@@ -76,4 +76,22 @@ public class JobServiceImplTest extends AbstractUnitTest {
 		assertNull(service.getStatus(TEST_JOB_NAME));
 	}
 	
+	@Test
+	public void testSave() {
+		JobDefinition job = jobDefinitionBuilder.mock().withKey(null).withName("Tashlin Build").build();
+		service.save(job);
+		verify(configurationService).save(job);
+		assertEquals("tashlin+build", job.getKey());
+	}
+	
+	@Test
+	public void testCreateKey() {
+		assertEquals("tashlin-build", service.createKey("tashlin-build"));
+		assertEquals("tashlin+build", service.createKey("Tashlin Build"));
+		assertEquals("tashlin+build", service.createKey("   Tashlin Build"));
+		assertEquals("tashlin+build", service.createKey("Tashlin Build    "));
+		assertEquals("tashlin+build", service.createKey("   Tashlin Build   "));
+		assertNull(service.createKey(null));
+	}
+	
 }

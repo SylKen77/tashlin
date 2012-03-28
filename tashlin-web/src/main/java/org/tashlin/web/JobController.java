@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
+import org.tashlin.core.model.JobDefinition;
 import org.tashlin.core.service.JobService;
 
 @Controller
@@ -22,6 +24,18 @@ public class JobController {
 	public String showJobs(HttpServletRequest request) {
 		request.setAttribute("jobs", jobService.getJobs());
 		return ".job.overview";
+	}
+	
+	@RequestMapping(value="/jobs/add", method = RequestMethod.GET)
+	public String addJob(HttpServletRequest request) {
+		request.setAttribute("job", new JobDefinition());
+		return ".job.add";
+	}
+	
+	@RequestMapping(value="/jobs/add", method = RequestMethod.POST)
+	public RedirectView saveJob(JobDefinition job) {
+		jobService.save(job);
+		return new RedirectView("/jobs", true);
 	}
 
 	@RequestMapping(value="/job/{key}/summary", method = RequestMethod.GET)
@@ -41,5 +55,7 @@ public class JobController {
 		map.put("status", jobService.getStatus(key));
 		return map;
 	}
+
+
 
 }

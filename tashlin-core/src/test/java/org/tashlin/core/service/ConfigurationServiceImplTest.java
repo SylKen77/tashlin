@@ -126,4 +126,15 @@ public class ConfigurationServiceImplTest extends AbstractUnitTest {
 		verify(configurationDao).save(configuration);
 	}
 	
+	@Test
+	public void testSaveJob() throws Exception {
+		JobDefinition job = jobDefinitionBuilder.mock().build();
+		Configuration cachedConfiguration = configurationBuilder.mock().build();
+		cachedConfiguration.setJobs(null);
+		Configuration newConfiguration = configurationBuilder.mock().withJob(job).build();
+		when(configurationDao.getConfiguration()).thenReturn(cachedConfiguration);
+		service.save(job);
+		verify(configurationDao).save(newConfiguration);
+	}
+	
 }

@@ -5,6 +5,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.SchedulerException;
@@ -47,10 +48,17 @@ public class JobServiceImpl implements JobService {
 		return null;
 	}
 
+	public void save(JobDefinition job) {
+		job.setKey(createKey(job.getName()));
+		configurationService.save(job);
+	}
+	
+	protected String createKey(String name) {
+		if(name != null) {
+			return StringUtils.replace(name.toLowerCase().trim(), " ", "+");
+		}
+		return null;
+	}
 
-	
-	
-	
-	
 
 }

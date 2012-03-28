@@ -11,6 +11,11 @@
         <put-attribute name="page" value="/WEB-INF/jsp/job/overview.jsp" />
     </definition>
     
+    <definition name=".job.add" extends="main">
+    	<put-attribute name="title" value="jobs.add.title" />
+        <put-attribute name="page" value="/WEB-INF/jsp/job/add.jsp" />
+    </definition>
+    
     <definition name=".job.summary" extends="main">
     	<put-attribute name="title" value="jobs.title" />
         <put-attribute name="page" value="/WEB-INF/jsp/job/summary.jsp" />

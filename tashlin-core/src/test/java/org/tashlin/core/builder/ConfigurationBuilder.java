@@ -24,6 +24,12 @@ public class ConfigurationBuilder {
 		return this;
 	}
 	
+	public ConfigurationBuilder withJob(JobDefinition job) {
+		configuration.getJobs().clear();
+		configuration.getJobs().put(job.getKey(), job);
+		return this;
+	}
+	
 	public Configuration build() {
 		return configuration;
 	}

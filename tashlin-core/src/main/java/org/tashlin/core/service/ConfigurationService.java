@@ -13,6 +13,8 @@ public interface ConfigurationService {
 	
 	GlobalSettings getGlobalSettings();
 	
+	void save(JobDefinition job);
+	
 	void save(GlobalSettings globalSettings);
 	
 }

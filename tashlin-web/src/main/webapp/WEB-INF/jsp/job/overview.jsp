@@ -5,6 +5,8 @@
 
 <h1><spring:message code="jobs.title" /></h1>
 
+<a href="<c:url value="/jobs/add" />"><spring:message code="jobs.add.link" /></a><br />
+
 <ul>
 <c:forEach var="job" items="${jobs}">
 	<li><a href="<c:url value='/job/${job.key}/summary' />">${job.name}</a></li>

@@ -2,6 +2,7 @@ package org.tashlin.core.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,15 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	public void save(GlobalSettings globalSettings) {
 		checkConfiguration();
 		configuration.setGlobalSettings(globalSettings);
+		save(configuration);
+	}
+	
+	public void save(JobDefinition job) {
+		checkConfiguration();
+		if(configuration.getJobs() == null) {
+			configuration.setJobs(new LinkedHashMap<String, JobDefinition>());
+		}
+		configuration.getJobs().put(job.getKey(), job);
 		save(configuration);
 	}
 	

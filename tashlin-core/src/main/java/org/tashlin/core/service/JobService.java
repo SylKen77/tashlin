@@ -14,4 +14,6 @@ public interface JobService {
 	
 	String getStatus(String name);
 	
+	void save(JobDefinition job);
+	
 }

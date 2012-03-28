@@ -1,6 +1,8 @@
 package org.tashlin.web;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -15,21 +17,20 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.tashlin.core.builder.JobDefinitionBuilder;
 import org.tashlin.core.model.JobDefinition;
 import org.tashlin.core.service.JobService;
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-
 import org.tashlin.test.AbstractUnitTest;
 
 public class JobControllerTest extends AbstractUnitTest {
 
 	private JobController controller;
 	private MockHttpServletRequest request;
+	private JobDefinitionBuilder jobDefinitionBuilder;
 	@Mock private JobService jobService;
 	
 	@Before
 	public void setUp() {
 		controller = new JobController();
 		request = new MockHttpServletRequest();
+		jobDefinitionBuilder = new JobDefinitionBuilder();
 		ReflectionTestUtils.setField(controller, "jobService", jobService);
 	}
 	
@@ -67,6 +68,19 @@ public class JobControllerTest extends AbstractUnitTest {
 		when(jobService.getStatus("tashlin-build")).thenReturn(null);
 		Map<String, String> map = controller.getStatus("tashlin-build");
 		assertNull(map.get("status"));
+	}
+	
+	@Test
+	public void testAddJob() {
+		assertEquals(".job.add", controller.addJob(request));
+		assertEquals(new JobDefinition(), request.getAttribute("job"));
+	}
+	
+	@Test
+	public void testSaveJob() {
+		JobDefinition job = jobDefinitionBuilder.mock().build();
+		assertEquals("/jobs", controller.saveJob(job).getUrl());
+		verify(jobService).save(job);
 	}
 	
 }
