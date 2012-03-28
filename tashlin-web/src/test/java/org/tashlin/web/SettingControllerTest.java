@@ -39,7 +39,7 @@ public class SettingControllerTest extends AbstractUnitTest {
 	@Test
 	public void testSave() {
 		GlobalSettings globalSettings = globalSettingsBuilder.mock().build();
-		assertEquals("redirect:/jobs", controller.save(globalSettings));
+		assertEquals("/jobs", controller.save(globalSettings).getUrl());
 		verify(settingService).save(globalSettings);
 	}
 

@@ -3,17 +3,16 @@ package org.tashlin.core.dao;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.tashlin.core.model.Configuration;
+import org.tashlin.core.model.GlobalSettings;
 import org.tashlin.core.model.JobDefinition;
 
 import com.thoughtworks.xstream.XStream;
@@ -31,6 +30,7 @@ public class XmlConfigurationDao implements ConfigurationDao {
 		xstream = new XStream(new DomDriver("UTF-8"));
 		xstream.alias("tashlin", Configuration.class);  
 		xstream.alias("job", JobDefinition.class);  
+		xstream.alias("globalSettings", GlobalSettings.class);
 	}
 	
 	public void save(Configuration configuration) throws IOException {

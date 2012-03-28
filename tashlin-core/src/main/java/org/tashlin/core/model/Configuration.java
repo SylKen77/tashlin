@@ -36,6 +36,4 @@ public class Configuration {
 		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 	
-	
-	
 }

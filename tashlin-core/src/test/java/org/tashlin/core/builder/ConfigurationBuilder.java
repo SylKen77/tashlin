@@ -9,14 +9,17 @@ import org.tashlin.core.model.JobDefinition;
 public class ConfigurationBuilder {
 
 	private Configuration configuration;
+	private GlobalSettingsBuilder globalSettingsBuilder;
 	private JobDefinitionBuilder jobDefinitionBuilder;
 	
 	public ConfigurationBuilder() {
+		globalSettingsBuilder = new GlobalSettingsBuilder();
 		jobDefinitionBuilder = new JobDefinitionBuilder();
 	}
 	
 	public ConfigurationBuilder mock() {
 		configuration = new Configuration();
+		configuration.setGlobalSettings(globalSettingsBuilder.mock().build());
 		addJobs();
 		return this;
 	}

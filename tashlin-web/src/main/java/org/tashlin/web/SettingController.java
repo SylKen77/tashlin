@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.view.RedirectView;
 import org.tashlin.core.model.GlobalSettings;
 import org.tashlin.core.service.SettingService;
 
@@ -23,9 +24,9 @@ public class SettingController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String save(@ModelAttribute GlobalSettings globalSettings) {
+	public RedirectView save(@ModelAttribute GlobalSettings globalSettings) {
 		settingService.save(globalSettings);
-		return "redirect:/jobs";
+		return new RedirectView("/jobs", true);
 	}
 
 }

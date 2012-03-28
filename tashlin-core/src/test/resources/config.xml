@@ -1,4 +1,7 @@
 <tashlin>
+  <globalSettings>
+  	<mavenHome>D:/DEV/maven/bin</mavenHome>
+  </globalSettings>
   <jobs class="linked-hash-map">
     <entry>
       <string>tashlin-build</string>

@@ -5,6 +5,6 @@
 
 <form:form commandName="globalSettings">
 	<spring:message code="settings.mavenHome.label" />
-	<form:input path="globalSettings" /><br />
+	<form:input path="mavenHome" /><br />
 	<input type="submit" value="<spring:message code="button.save" />"/>
 </form:form>
