@@ -10,6 +10,7 @@ public class JobDefinitionBuilder {
 		jobDefiniton = new JobDefinition();
 		jobDefiniton.setKey("tashlin-build");
 		jobDefiniton.setName("tashlin-build");
+		jobDefiniton.setCronSchedule("0 * * * *");
 		return this;
 	}
 	

@@ -8,6 +8,7 @@
       <job>
       	<key>tashlin-build</key>
         <name>tashlin-build</name>
+        <cronSchedule>0 * * * *</cronSchedule>
       </job>
     </entry>
     <entry>
@@ -15,6 +16,7 @@
       <job>
         <key>tashlin-integration</key>
         <name>tashlin-integration</name>
+        <cronSchedule>0 * * * *</cronSchedule>
       </job>
     </entry>
   </jobs>

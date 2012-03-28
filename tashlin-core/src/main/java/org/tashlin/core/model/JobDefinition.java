@@ -1,12 +1,18 @@
 package org.tashlin.core.model;
 
+import javax.validation.constraints.Min;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class JobDefinition {
 	
 	private String key;
+	
+	@Min(0)
 	private String name;
+	
+	private String cronSchedule;
 
 	public String getKey() {
 		return key;
@@ -22,6 +28,14 @@ public class JobDefinition {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getCronSchedule() {
+		return cronSchedule;
+	}
+
+	public void setCronSchedule(String cronSchedule) {
+		this.cronSchedule = cronSchedule;
 	}
 
 	@Override

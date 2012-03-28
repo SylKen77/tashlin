@@ -67,6 +67,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+		<dependency>
 			<groupId>org.tashlin</groupId>
 			<artifactId>tashlin-test</artifactId>
 			<version>${project.version}</version>

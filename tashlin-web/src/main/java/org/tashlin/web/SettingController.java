@@ -1,13 +1,13 @@
 package org.tashlin.web;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.view.RedirectView;
 import org.tashlin.core.model.GlobalSettings;
 import org.tashlin.core.service.SettingService;
 
@@ -24,9 +24,12 @@ public class SettingController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public RedirectView save(@ModelAttribute GlobalSettings globalSettings) {
+	public String save(@Valid GlobalSettings globalSettings, BindingResult result) {
+		if(result.hasErrors()) {
+			return ".settings.overview";
+		}
 		settingService.save(globalSettings);
-		return new RedirectView("/jobs", true);
+		return "redirect:/jobs";
 	}
 
 }
