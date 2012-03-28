@@ -60,5 +60,9 @@ public class JobServiceImpl implements JobService {
 		return null;
 	}
 
+	public void delete(String key) {
+		configurationService.delete(key);
+	}
+
 
 }

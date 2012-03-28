@@ -94,4 +94,10 @@ public class JobServiceImplTest extends AbstractUnitTest {
 		assertNull(service.createKey(null));
 	}
 	
+	@Test
+	public void testDelete() {
+		service.delete("tashlin-build");
+		verify(configurationService).delete("tashlin-build");
+	}
+	
 }

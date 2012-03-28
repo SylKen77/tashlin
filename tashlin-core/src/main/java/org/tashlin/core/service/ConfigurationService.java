@@ -7,7 +7,7 @@ import org.tashlin.core.model.JobDefinition;
 
 public interface ConfigurationService {
 
-	JobDefinition getJob(String name);
+	JobDefinition getJob(String key);
 	
 	List<JobDefinition> getJobs();
 	
@@ -16,5 +16,7 @@ public interface ConfigurationService {
 	void save(JobDefinition job);
 	
 	void save(GlobalSettings globalSettings);
+	
+	void delete(String key);
 	
 }

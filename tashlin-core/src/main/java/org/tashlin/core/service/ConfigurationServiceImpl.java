@@ -60,6 +60,12 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		}
 	}
 	
+	public void delete(String key) {
+		checkConfiguration();
+
+		configuration.getJobs().remove(key);
+	}
+	
 	private void checkConfiguration() {
 		if(configuration == null) {
 			try {
@@ -69,6 +75,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 			}
 		}
 	}
+
+
 
 	
 	

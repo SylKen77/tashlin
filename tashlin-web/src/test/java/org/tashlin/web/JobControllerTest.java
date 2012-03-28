@@ -83,4 +83,10 @@ public class JobControllerTest extends AbstractUnitTest {
 		verify(jobService).save(job);
 	}
 	
+	@Test
+	public void testDeleteJob() {
+		assertEquals("/jobs", controller.deleteJob("tashlin-build").getUrl());
+		verify(jobService).delete("tashlin-build");
+	}
+	
 }

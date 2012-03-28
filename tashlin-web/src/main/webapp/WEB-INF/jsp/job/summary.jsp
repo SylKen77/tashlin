@@ -26,5 +26,9 @@
 
 <h1>${job.name}</h1>
 
+<ul>
+	<li><a href="<c:url value="/job/${job.key}/delete />"><spring:message code="jobs.delete.link" /></a></li>
+</ul>
+
 <input id="run" type="button" value="run build" />
 <div id="console"></div>

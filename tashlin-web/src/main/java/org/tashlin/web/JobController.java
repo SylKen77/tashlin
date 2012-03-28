@@ -37,6 +37,12 @@ public class JobController {
 		jobService.save(job);
 		return new RedirectView("/jobs", true);
 	}
+	
+	@RequestMapping(value="/job/{key}/delete", method = RequestMethod.GET)
+	public RedirectView deleteJob(@PathVariable String key) {
+		jobService.delete(key);
+		return new RedirectView("/jobs", true);
+	}
 
 	@RequestMapping(value="/job/{key}/summary", method = RequestMethod.GET)
 	public String showJobSummary(HttpServletRequest request, @PathVariable String key) {

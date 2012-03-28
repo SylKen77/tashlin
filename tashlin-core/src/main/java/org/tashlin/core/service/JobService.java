@@ -6,14 +6,16 @@ import org.tashlin.core.model.JobDefinition;
 
 public interface JobService {
 
-	JobDefinition getJob(String name);
+	JobDefinition getJob(String key);
 	
 	List<JobDefinition> getJobs();
 	
-	void schedule(String name);
+	void schedule(String key);
 	
-	String getStatus(String name);
+	String getStatus(String key);
 	
 	void save(JobDefinition job);
+	
+	void delete(String key);
 	
 }
