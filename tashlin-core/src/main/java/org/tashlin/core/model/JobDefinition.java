@@ -4,14 +4,16 @@ import javax.validation.constraints.Min;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class JobDefinition {
 	
 	private String key;
 	
-	@Min(0)
+	@NotBlank
 	private String name;
 	
+	@NotBlank
 	private String cronSchedule;
 
 	public String getKey() {
