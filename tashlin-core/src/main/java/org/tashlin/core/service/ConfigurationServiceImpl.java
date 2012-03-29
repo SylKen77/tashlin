@@ -62,8 +62,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	
 	public void delete(String key) {
 		checkConfiguration();
-
 		configuration.getJobs().remove(key);
+		save(configuration);
 	}
 	
 	private void checkConfiguration() {

@@ -143,6 +143,7 @@ public class ConfigurationServiceImplTest extends AbstractUnitTest {
 		when(configurationDao.getConfiguration()).thenReturn(configuration);
 		service.delete("tashlin-build");
 		assertNull(configuration.getJobs().get("tashlin-build"));
+		verify(configurationDao).save(configuration);
 	}
 	
 	@Test
@@ -150,6 +151,8 @@ public class ConfigurationServiceImplTest extends AbstractUnitTest {
 		Configuration configuration = configurationBuilder.mock().build();
 		when(configurationDao.getConfiguration()).thenReturn(configuration);
 		service.delete("tashlin-unexist");
+		verify(configurationDao).save(configuration);
+
 	}
 	
 }

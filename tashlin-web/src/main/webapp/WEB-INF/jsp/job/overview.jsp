@@ -2,16 +2,37 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 
+<h2>Jobs</h2>
 
-<h1><spring:message code="jobs.title" /></h1>
+<p class="pull-right">
+	<a class="btn" href="<c:url value="/jobs/add" />">
+		<i class="icon-plus"></i><spring:message code="jobs.add.title" />
+	</a>
+</p>
 
-<a href="<c:url value="/jobs/add" />"><spring:message code="jobs.add.link" /></a><br />
+<c:if test="${not empty jobs}">
+<table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 50px;"><spring:message code="jobs.status.label" /></th>
+            <th><spring:message code="jobs.name.label" /></th>
+            <th style="width: 50px;"></th>
+            <th style="width: 50px;"></th>
+          </tr>
+        </thead>
+             <tbody>
+        <c:forEach var="job" items="${jobs}">
+          <tr>
+            <td><span class="label label-success">Success</span></td>
+            <td><a href="<c:url value='/job/${job.key}/summary' />">${job.name}</a></td>
+            <td><a href="<c:url value='/job/${job.key}/schedule' />" class="btn"><i class="icon-play"></i></a></td>
+            <td><a href="<c:url value='/job/${job.key}/delete' />" class="btn"><i class="icon-trash"></i></a></td>
+          </tr>
+        </c:forEach>
+        </tbody>
+      </table>
+</c:if>
 
-<ul>
-<c:forEach var="job" items="${jobs}">
-	<li><a href="<c:url value='/job/${job.key}/summary' />">${job.name}</a></li>
-</c:forEach>
-</ul>
 
 
 

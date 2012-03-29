@@ -4,24 +4,26 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 
-    <definition name="main" template="/WEB-INF/layouts/main.jsp" />  
+	<definition name="1col" template="/WEB-INF/layouts/1col.jsp" />
+    <definition name="2col" template="/WEB-INF/layouts/2col.jsp" />  
       
-    <definition name=".job.overview" extends="main">
+    <definition name=".job.overview" extends="1col">
     	<put-attribute name="title" value="jobs.title" />
         <put-attribute name="page" value="/WEB-INF/jsp/job/overview.jsp" />
     </definition>
     
-    <definition name=".job.add" extends="main">
+    <definition name=".job.add" extends="1col">
     	<put-attribute name="title" value="jobs.add.title" />
         <put-attribute name="page" value="/WEB-INF/jsp/job/add.jsp" />
     </definition>
     
-    <definition name=".job.summary" extends="main">
+    <definition name=".job.summary" extends="2col">
     	<put-attribute name="title" value="jobs.title" />
         <put-attribute name="page" value="/WEB-INF/jsp/job/summary.jsp" />
+        <put-attribute name="nav" value="/WEB-INF/jsp/job/nav.jsp" />
     </definition>
     
-    <definition name=".settings.overview" extends="main">
+    <definition name=".settings.overview" extends="1col">
     	<put-attribute name="title" value="settings.title" />
         <put-attribute name="page" value="/WEB-INF/jsp/settings/overview.jsp" />
     </definition>
