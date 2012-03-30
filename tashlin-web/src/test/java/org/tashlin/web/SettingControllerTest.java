@@ -7,16 +7,18 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.validation.BindingResult;
 import org.tashlin.core.builder.GlobalSettingsBuilder;
 import org.tashlin.core.model.GlobalSettings;
 import org.tashlin.core.service.SettingService;
-import org.tashlin.test.AbstractUnitTest;
 
-public class SettingControllerTest extends AbstractUnitTest {
+@RunWith(MockitoJUnitRunner.class)
+public class SettingControllerTest {
 	
 	private SettingController controller;
 	private MockHttpServletRequest request;
@@ -53,6 +55,12 @@ public class SettingControllerTest extends AbstractUnitTest {
 		GlobalSettings globalSettings = globalSettingsBuilder.mock().build();
 		assertEquals(".settings.overview", controller.save(globalSettings, bindingResult));
 		verifyZeroInteractions(settingService);
+	}
+	
+	@Test
+	public void testReloadConfiguration() {
+		assertEquals("redirect:/jobs", controller.reloadConfiguration());
+		verify(settingService).reloadConfiguration();
 	}
 
 }

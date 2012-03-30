@@ -6,13 +6,15 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.tashlin.core.builder.GlobalSettingsBuilder;
 import org.tashlin.core.model.GlobalSettings;
-import org.tashlin.test.AbstractUnitTest;
 
-public class SettingServiceImplTest extends AbstractUnitTest {
+@RunWith(MockitoJUnitRunner.class)
+public class SettingServiceImplTest {
 
 	private SettingService service;
 	private GlobalSettingsBuilder globalSettingsBuilder;
@@ -37,6 +39,12 @@ public class SettingServiceImplTest extends AbstractUnitTest {
 		GlobalSettings globalSettings = globalSettingsBuilder.mock().build();
 		service.save(globalSettings);
 		verify(configurationService).save(globalSettings);
+	}
+	
+	@Test
+	public void testReloadConfiguration() {
+		service.reloadConfiguration();
+		verify(configurationService).reloadConfiguration();
 	}
 	
 }

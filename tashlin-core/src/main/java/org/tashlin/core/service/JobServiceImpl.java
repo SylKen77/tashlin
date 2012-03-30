@@ -20,7 +20,7 @@ import org.tashlin.core.model.JobDefinition;
 @Service
 public class JobServiceImpl implements JobService {
 
-	private SchedulerFactoryBean schedulerFactoryBean;
+	@Autowired private SchedulerFactoryBean schedulerFactoryBean;
 	@Autowired private ConfigurationService configurationService;
 	
 	public JobDefinition getJob(String name) {
@@ -34,6 +34,7 @@ public class JobServiceImpl implements JobService {
 	public void schedule(String name) {
 		try {
 			JobDataMap jobDataMap = new JobDataMap();
+			jobDataMap.put("globalSettings", configurationService.getGlobalSettings());
 			jobDataMap.put("jobDefinition", getJob(name));
 			
 			JobDetail jobDetail = newJob(BuildJob.class).usingJobData(jobDataMap).build();

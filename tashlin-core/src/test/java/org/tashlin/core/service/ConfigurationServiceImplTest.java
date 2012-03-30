@@ -12,7 +12,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.tashlin.core.builder.ConfigurationBuilder;
 import org.tashlin.core.builder.GlobalSettingsBuilder;
@@ -22,9 +24,9 @@ import org.tashlin.core.exception.ServiceException;
 import org.tashlin.core.model.Configuration;
 import org.tashlin.core.model.GlobalSettings;
 import org.tashlin.core.model.JobDefinition;
-import org.tashlin.test.AbstractUnitTest;
 
-public class ConfigurationServiceImplTest extends AbstractUnitTest {
+@RunWith(MockitoJUnitRunner.class)
+public class ConfigurationServiceImplTest {
 
 	private ConfigurationServiceImpl service;
 	private ConfigurationBuilder configurationBuilder;
@@ -152,7 +154,18 @@ public class ConfigurationServiceImplTest extends AbstractUnitTest {
 		when(configurationDao.getConfiguration()).thenReturn(configuration);
 		service.delete("tashlin-unexist");
 		verify(configurationDao).save(configuration);
-
+	}
+	
+	@Test
+	public void testReloadConfiguration() throws Exception {
+		Configuration configuration = configurationBuilder.mock().build();
+		Configuration reloadedConfiguration = configurationBuilder.mock().build();
+		reloadedConfiguration.getGlobalSettings().getColors().setSuccess("#000000");
+		when(configurationDao.getConfiguration()).thenReturn(configuration, reloadedConfiguration);
+		assertEquals(configuration.getGlobalSettings(), service.getGlobalSettings());
+		assertEquals(configuration.getGlobalSettings(), service.getGlobalSettings());
+		service.reloadConfiguration();
+		assertEquals(reloadedConfiguration.getGlobalSettings(), service.getGlobalSettings());
 	}
 	
 }

@@ -17,4 +17,8 @@ public class SettingServiceImpl implements SettingService {
 		configurationService.save(globalSettings);
 	}
 
+	public void reloadConfiguration() {
+		configurationService.reloadConfiguration();
+	}
+
 }

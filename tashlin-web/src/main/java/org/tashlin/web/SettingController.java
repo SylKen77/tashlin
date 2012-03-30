@@ -32,4 +32,10 @@ public class SettingController {
 		return "redirect:/jobs";
 	}
 
+	@RequestMapping(value="/reload", method = RequestMethod.GET)
+	public String reloadConfiguration() {
+		settingService.reloadConfiguration();
+		return "redirect:/jobs";
+	}
+
 }

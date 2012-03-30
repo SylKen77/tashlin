@@ -2,11 +2,17 @@ package org.tashlin.core.model;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class Colors {
 
+	@NotBlank
 	private String success;
+	
+	@NotBlank
 	private String failed;
+	
+	@NotBlank
 	private String unknown;
 	
 	public Colors() {

@@ -12,7 +12,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -23,9 +25,8 @@ import org.tashlin.core.builder.JobDefinitionBuilder;
 import org.tashlin.core.exception.ServiceException;
 import org.tashlin.core.model.JobDefinition;
 
-import org.tashlin.test.AbstractUnitTest;
-
-public class JobServiceImplTest extends AbstractUnitTest {
+@RunWith(MockitoJUnitRunner.class)
+public class JobServiceImplTest {
 
 	private static final String TEST_JOB_NAME = "tashlin-build";
 	

@@ -11,15 +11,17 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.tashlin.core.builder.JobDefinitionBuilder;
 import org.tashlin.core.model.JobDefinition;
 import org.tashlin.core.service.JobService;
-import org.tashlin.test.AbstractUnitTest;
 
-public class JobControllerTest extends AbstractUnitTest {
+@RunWith(MockitoJUnitRunner.class)
+public class JobControllerTest {
 
 	private JobController controller;
 	private MockHttpServletRequest request;

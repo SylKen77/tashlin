@@ -8,4 +8,6 @@ public interface SettingService {
 	
 	void save(GlobalSettings globalSettings);
 	
+	void reloadConfiguration();
+	
 }

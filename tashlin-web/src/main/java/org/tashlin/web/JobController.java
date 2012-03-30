@@ -62,6 +62,4 @@ public class JobController {
 		return map;
 	}
 
-
-
 }

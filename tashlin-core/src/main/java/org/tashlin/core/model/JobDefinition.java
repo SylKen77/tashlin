@@ -1,7 +1,5 @@
 package org.tashlin.core.model;
 
-import javax.validation.constraints.Min;
-
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.NotBlank;

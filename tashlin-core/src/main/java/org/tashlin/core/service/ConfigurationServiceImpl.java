@@ -68,11 +68,15 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	
 	private void checkConfiguration() {
 		if(configuration == null) {
-			try {
-				this.configuration = configurationDao.getConfiguration();
-			} catch(IOException e) {
-				throw new ServiceException();
-			}
+			reloadConfiguration();
+		}
+	}
+
+	public void reloadConfiguration() {
+		try {
+			this.configuration = configurationDao.getConfiguration();
+		} catch(IOException e) {
+			throw new ServiceException();
 		}
 	}
 
