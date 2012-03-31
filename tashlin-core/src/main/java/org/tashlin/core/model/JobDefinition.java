@@ -7,12 +7,17 @@ import org.hibernate.validator.constraints.NotBlank;
 public class JobDefinition {
 	
 	private String key;
+	private int lastBuildNr;
 	
 	@NotBlank
 	private String name;
 	
 	@NotBlank
 	private String cronSchedule;
+	
+	public int addLastBuildNr() {
+		return lastBuildNr++;
+	}
 
 	public String getKey() {
 		return key;
@@ -36,6 +41,14 @@ public class JobDefinition {
 
 	public void setCronSchedule(String cronSchedule) {
 		this.cronSchedule = cronSchedule;
+	}
+	
+	public int getLastBuildNr() {
+		return lastBuildNr;
+	}
+
+	public void setLastBuildNr(int lastBuildNr) {
+		this.lastBuildNr = lastBuildNr;
 	}
 
 	@Override

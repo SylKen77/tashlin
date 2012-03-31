@@ -3,11 +3,10 @@
 
 <script>
 
-	var timer;
 	$(document).ready(function() {
-		$("#run").click(function() {
-			$.get('<c:url value="/job/${job.key}/build" />', function(data) {
-				timer = setInterval(writeToConsole, 500);
+		$(".schedule").click(function() {
+			$.get('<c:url value="/job/' + this.id + '/schedule" />', function(data) {
+				
 			});
 		});
 	});
@@ -44,7 +43,7 @@
           <tr>
             <td><span class="label label-success">Success</span></td>
             <td><a href="<c:url value='/job/${job.key}/summary' />">${job.name}</a></td>
-            <td><a class="btn schedule"><i class="icon-play"></i></a></td>
+            <td><a id="${job.key}" class="btn schedule"><i class="icon-play"></i></a></td>
             <td><a href="<c:url value='/job/${job.key}/delete' />" class="btn"><i class="icon-trash"></i></a></td>
           </tr>
         </c:forEach>

@@ -8,6 +8,7 @@ public class JobDefinitionBuilder {
 	
 	public JobDefinitionBuilder mock() {
 		jobDefiniton = new JobDefinition();
+		jobDefiniton.setLastBuildNr(4);
 		jobDefiniton.setKey("tashlin-build");
 		jobDefiniton.setName("tashlin-build");
 		jobDefiniton.setCronSchedule("0 * * * *");

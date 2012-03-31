@@ -6,16 +6,18 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.springframework.util.StringUtils;
 import org.tashlin.core.builder.ConfigurationBuilder;
 import org.tashlin.core.model.Configuration;
 
 public class XmlConfigurationDaoImplIntegrationTest {
 
-	private XmlConfigurationDao dao;
 	private static final File TEST_XML_FILE = new File("src/test/resources/config.xml");
-	private static final File TEST_TEMP_XML_FILE = new File("target/config-temp.xml");
+	private XmlConfigurationDao dao;
+	@Rule public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
 	@Test
 	public void testGetConfiguration() throws Exception {
@@ -35,10 +37,11 @@ public class XmlConfigurationDaoImplIntegrationTest {
 	
 	@Test
 	public void testSave() throws Exception {
-		dao = new XmlConfigurationDao(TEST_TEMP_XML_FILE);
+		File tempXmlFile = temporaryFolder.newFile("config.xml");
+		dao = new XmlConfigurationDao(tempXmlFile);
 		dao.save(new ConfigurationBuilder().mock().build());
 		String expected = StringUtils.trimAllWhitespace(FileUtils.readFileToString(TEST_XML_FILE));
-		String actual = StringUtils.trimAllWhitespace(FileUtils.readFileToString(TEST_TEMP_XML_FILE));
+		String actual = StringUtils.trimAllWhitespace(FileUtils.readFileToString(tempXmlFile));
 		assertEquals(expected, actual);
 	}
 	
