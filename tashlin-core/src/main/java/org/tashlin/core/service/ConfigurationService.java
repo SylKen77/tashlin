@@ -17,7 +17,7 @@ public interface ConfigurationService {
 	
 	void save(GlobalSettings globalSettings);
 	
-	void reloadConfiguration();
+	void loadConfiguration();
 	
 	void delete(String key);
 	

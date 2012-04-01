@@ -18,7 +18,7 @@ public class SettingServiceImpl implements SettingService {
 	}
 
 	public void reloadConfiguration() {
-		configurationService.reloadConfiguration();
+		configurationService.loadConfiguration();
 	}
 
 }

@@ -27,12 +27,20 @@ public class XmlConfigurationDaoImplIntegrationTest {
 	}
 	
 	@Test
-	public void testGetConfigurationWhenConfigDoesNotExist() throws Exception {
-		File source = new File("target/unexisting-config.xml");
-		dao = new XmlConfigurationDao(source);
+	public void testGetConfigurationWhenConfigDoesntexist() throws Exception {
+		File tashlinRoot = temporaryFolder.newFolder("/tashlin");
+		File configFile = new File(tashlinRoot + "/config.xml");	
+		dao = new XmlConfigurationDao(configFile);
 		dao.getConfiguration();
-		assertTrue(source.exists());
-		source.delete();
+		assertTrue(configFile.exists());
+	}
+	
+	@Test
+	public void testGetConfigurationWhenRootFolderDoesntExist() throws Exception {
+		File configFile = new File(temporaryFolder.getRoot() + "/tashlin/config.xml");
+		dao = new XmlConfigurationDao(configFile);
+		dao.getConfiguration();
+		assertTrue(configFile.exists());
 	}
 	
 	@Test

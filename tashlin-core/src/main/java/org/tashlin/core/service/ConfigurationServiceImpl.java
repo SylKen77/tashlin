@@ -68,11 +68,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	
 	private void checkConfiguration() {
 		if(configuration == null) {
-			reloadConfiguration();
+			loadConfiguration();
 		}
 	}
 
-	public void reloadConfiguration() {
+	public void loadConfiguration() {
 		try {
 			this.configuration = configurationDao.getConfiguration();
 		} catch(IOException e) {
@@ -80,8 +80,4 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		}
 	}
 
-
-
-	
-	
 }

@@ -15,7 +15,7 @@
 	</bean>
 
 	<bean id="xmlConfig" class="java.io.File">
-		<constructor-arg value="${config.file}"/>
+		<constructor-arg value="${tashlin.root}/config.xml"/>
 	</bean>
 
 </beans>

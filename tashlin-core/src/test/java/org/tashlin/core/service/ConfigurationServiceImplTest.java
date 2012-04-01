@@ -163,8 +163,7 @@ public class ConfigurationServiceImplTest {
 		reloadedConfiguration.getGlobalSettings().getColors().setSuccess("#000000");
 		when(configurationDao.getConfiguration()).thenReturn(configuration, reloadedConfiguration);
 		assertEquals(configuration.getGlobalSettings(), service.getGlobalSettings());
-		assertEquals(configuration.getGlobalSettings(), service.getGlobalSettings());
-		service.reloadConfiguration();
+		service.loadConfiguration();
 		assertEquals(reloadedConfiguration.getGlobalSettings(), service.getGlobalSettings());
 	}
 	

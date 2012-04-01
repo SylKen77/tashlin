@@ -44,7 +44,7 @@ public class SettingServiceImplTest {
 	@Test
 	public void testReloadConfiguration() {
 		service.reloadConfiguration();
-		verify(configurationService).reloadConfiguration();
+		verify(configurationService).loadConfiguration();
 	}
 	
 }

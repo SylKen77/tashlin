@@ -39,6 +39,7 @@ public class XmlConfigurationDao implements ConfigurationDao {
 	
 	public Configuration getConfiguration() throws IOException {
 		if(!source.exists()) {
+			source.getParentFile().mkdir();
 			source.createNewFile();
 			InputStream cleanConfig = this.getClass().getClassLoader().getResourceAsStream("clean-config.xml");
 			OutputStream os = new FileOutputStream(source);
