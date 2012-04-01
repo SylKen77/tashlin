@@ -25,11 +25,34 @@ public class BasicPrepareStrategyTest {
 	
 	@Test
 	public void testPrepare() throws Exception {
-		temporaryFolder.newFolder("jobs");
-		temporaryFolder.newFolder("jobs/tashlin-build");
 		File buildsFolder = temporaryFolder.newFolder("jobs/tashlin-build/builds");
+		buildsFolder.mkdirs();
 		strategy.prepare(temporaryFolder.getRoot(), job);
 		assertTrue(new File(buildsFolder + "/5").exists());
+		assertEquals(5, job.getLastBuildNr());
+	}
+	
+	@Test
+	public void testPrepareWhenBuildsFolderDoesntExist() throws Exception {
+		File tashlinBuildFolder = temporaryFolder.newFolder("jobs/tashlin-build");
+		tashlinBuildFolder.mkdirs();
+		strategy.prepare(temporaryFolder.getRoot(), job);
+		assertTrue(new File(tashlinBuildFolder + "/builds/5").exists());
+		assertEquals(5, job.getLastBuildNr());
+	}
+	
+	@Test
+	public void testPrepareWhenTashlinBuildFolderDoesntExist() throws Exception {
+		File jobsFolder = temporaryFolder.newFolder("jobs");
+		strategy.prepare(temporaryFolder.getRoot(), job);
+		assertTrue(new File(jobsFolder + "/tashlin-build/builds/5").exists());
+		assertEquals(5, job.getLastBuildNr());
+	}
+	
+	@Test
+	public void testPrepareWhenJobsFolderDoesntExist() throws Exception {
+		strategy.prepare(temporaryFolder.getRoot(), job);
+		assertTrue(new File(temporaryFolder.getRoot() + "/jobs/tashlin-build/builds/5").exists());
 		assertEquals(5, job.getLastBuildNr());
 	}
 	

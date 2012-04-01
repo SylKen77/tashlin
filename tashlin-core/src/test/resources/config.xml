@@ -12,6 +12,7 @@
       <string>tashlin-build</string>
       <job>
       	<key>tashlin-build</key>
+      	<lastBuildNr>4</lastBuildNr>
         <name>tashlin-build</name>
         <cronSchedule>0 * * * *</cronSchedule>
       </job>
@@ -20,6 +21,7 @@
       <string>tashlin-integration</string>
       <job>
         <key>tashlin-integration</key>
+        <lastBuildNr>4</lastBuildNr>
         <name>tashlin-integration</name>
         <cronSchedule>0 * * * *</cronSchedule>
       </job>

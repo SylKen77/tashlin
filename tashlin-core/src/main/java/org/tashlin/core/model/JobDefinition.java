@@ -16,7 +16,7 @@ public class JobDefinition {
 	private String cronSchedule;
 	
 	public int addLastBuildNr() {
-		return lastBuildNr++;
+		return ++lastBuildNr;
 	}
 
 	public String getKey() {
