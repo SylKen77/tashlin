@@ -1,24 +1,31 @@
 package org.tashlin.core.build;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.tashlin.core.model.GlobalSettings;
+import org.tashlin.core.model.JobDefinition;
 
 public class BuildJob implements Job {
 
-	private GlobalSettings globalSettings;
-	
 	public void execute(JobExecutionContext ctx) throws JobExecutionException {
-		JobDataMap jobDataMap = ctx.getMergedJobDataMap();
-		System.out.println("// WE ARE RUNNING: " + globalSettings);
+		try {
+			JobDataMap map = ctx.getJobDetail().getJobDataMap();
+			JobDefinition job = (JobDefinition) map.get("jobDefenition");
+			File rootFolder= (File) map.get("rootFolder");
+			
+			PrepareStrategy prepareStrategy = new BasicPrepareStrategy();
+			prepareStrategy.prepare(rootFolder, job);
+		} catch(IOException e) {
+			throw new JobExecutionException();
+		}
 	}
 
-	public void setGlobalSettings(GlobalSettings globalSettings) {
-		this.globalSettings = globalSettings;
-	}
-	
+
 	
 
 }
