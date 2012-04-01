@@ -3,6 +3,7 @@ package org.tashlin.core.service;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -11,6 +12,7 @@ import org.quartz.JobDetail;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 import org.tashlin.core.build.BuildJob;
@@ -22,6 +24,7 @@ public class JobServiceImpl implements JobService {
 
 	@Autowired private SchedulerFactoryBean schedulerFactoryBean;
 	@Autowired private ConfigurationService configurationService;
+	@Autowired @Qualifier("rootFolder") private File rootFolder;
 	
 	public JobDefinition getJob(String name) {
 		return configurationService.getJob(name);
@@ -34,8 +37,8 @@ public class JobServiceImpl implements JobService {
 	public void schedule(String name) {
 		try {
 			JobDataMap jobDataMap = new JobDataMap();
-			jobDataMap.put("globalSettings", configurationService.getGlobalSettings());
 			jobDataMap.put("jobDefinition", getJob(name));
+			jobDataMap.put("rootFolder", rootFolder);
 			
 			JobDetail jobDetail = newJob(BuildJob.class).usingJobData(jobDataMap).build();
 			Trigger trigger = newTrigger().startNow().build();

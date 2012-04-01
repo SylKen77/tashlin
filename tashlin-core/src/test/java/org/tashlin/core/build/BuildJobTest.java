@@ -30,7 +30,7 @@ public class BuildJobTest {
 	@Test
 	public void testExecute() throws Exception {
 		JobDataMap map = new JobDataMap();
-		map.put("jobDefenition", new JobDefinitionBuilder().mock().build());
+		map.put("jobDefinition", new JobDefinitionBuilder().mock().build());
 		map.put("rootFolder", temporaryFolder.getRoot());
 		when(ctx.getJobDetail()).thenReturn(jobDetail);
 		when(jobDetail.getJobDataMap()).thenReturn(map);

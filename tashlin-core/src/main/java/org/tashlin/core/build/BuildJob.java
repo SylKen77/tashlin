@@ -15,7 +15,7 @@ public class BuildJob implements Job {
 	public void execute(JobExecutionContext ctx) throws JobExecutionException {
 		try {
 			JobDataMap map = ctx.getJobDetail().getJobDataMap();
-			JobDefinition job = (JobDefinition) map.get("jobDefenition");
+			JobDefinition job = (JobDefinition) map.get("jobDefinition");
 			File rootFolder= (File) map.get("rootFolder");
 			
 			PrepareStrategy prepareStrategy = new BasicPrepareStrategy();

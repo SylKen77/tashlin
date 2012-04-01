@@ -51,7 +51,7 @@ public class JobController {
 	}
 
 	@RequestMapping(value="/job/{key}/schedule", method = RequestMethod.GET)
-	public void schedule(HttpServletRequest request, @PathVariable String key) {
+	public @ResponseBody void schedule(HttpServletRequest request, @PathVariable String key) {
 		jobService.schedule(key);
 	}
 	
