@@ -59,3 +59,7 @@ project('tashlin-web') {
 		testCompile project(':tashlin-core').sourceSets.test.output
 	}
 }
+
+task hello << {
+println 'Hello world!'
+}
