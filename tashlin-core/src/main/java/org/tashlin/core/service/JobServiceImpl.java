@@ -42,6 +42,9 @@ public class JobServiceImpl implements JobService {
 			
 			JobDetail jobDetail = newJob(BuildJob.class).usingJobData(jobDataMap).build();
 			Trigger trigger = newTrigger().startNow().build();
+			
+			// TODO: TriggerUtils?
+			
 			schedulerFactoryBean.getObject().scheduleJob(jobDetail, trigger);
 		} catch(SchedulerException e) {
 			throw new ServiceException();
