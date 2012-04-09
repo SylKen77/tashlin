@@ -1,13 +1,24 @@
-configure(allprojects) {
-	apply plugin: 'java'
+version = '0.0.1-SNAPSHOT'
 
-	group = 'org.tashlin'
+configure(rootProject) {
 
-	sourceCompatibility=1.5
-	targetCompatibility=1.5
+	task dist(type: Zip) {
+		classifier = "tashlin-${project.version}"
+		
+		from('tashlin-standalone') {include 'lib/**'}
+		from('tashlin-standalone/scripts') {into 'bin'}
+		from('tashlin-standalone/build/libs/tashlin-standalone.jar') {into 'lib'}
+		from('tashlin-web/build/libs/tashlin-web.war') {into 'war'}	
+	}
 	
-	project.ext.springVersion = '3.1.0.RELEASE'
-	project.ext.commonsLangVersion = '2.6'
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+
+	springVersion = '3.1.1.RELEASE'
+	commonsLangVersion = '2.6'
 	
 	repositories {
 		mavenCentral()
@@ -19,6 +30,28 @@ configure(allprojects) {
     }
 	
 }
+
+project('tashlin-test') {
+	dependencies {
+		 testCompile "org.springframework:spring-test:${springVersion}"
+	}
+}
+
+project('tashlin-standalone') {
+	jar {
+		from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	    manifest {
+	    	attributes("Main-Class": "org.tashlin.standalone.JettyStarter")
+	    }
+	}
+    
+	dependencies {
+		compile 'org.eclipse.jetty:jetty-webapp:7.5.4.v20111024'
+		compile 'org.mortbay.jetty:jsp-2.1-glassfish:2.1.v20100127'
+		compile 'jstl:jstl:1.2'
+	}
+}
+
 
 project('tashlin-test') {
 	dependencies {
@@ -58,8 +91,7 @@ project('tashlin-web') {
 		testCompile "org.springframework:spring-test:${springVersion}"
 		testCompile project(':tashlin-core').sourceSets.test.output
 	}
-}
-
-task hello << {
-println 'Hello world!'
+	
+	httpPort = 8081
+		
 }

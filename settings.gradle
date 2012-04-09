@@ -1,5 +1,6 @@
 rootProject.name = 'tashlin'
 
+include 'tashlin-standalone'
 include 'tashlin-test'
 include 'tashlin-core'
 include 'tashlin-web'
