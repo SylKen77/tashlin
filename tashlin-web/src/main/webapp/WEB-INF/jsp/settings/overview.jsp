@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
@@ -14,6 +15,7 @@
           </div>
           <div class="form-actions">
             <button class="btn btn-primary" type="submit"><spring:message code="button.save" /></button>
+            <a href="<c:url value="/" />" class="btn"><spring:message code="button.cancel" /></a>
           </div>
         </fieldset>
 </form:form>

@@ -10,6 +10,10 @@ public class Configuration {
 	private GlobalSettings globalSettings;
 	private Map<String, JobDefinition> jobs;
 
+	public Configuration() {
+		globalSettings = new GlobalSettings();
+	}
+	
 	public GlobalSettings getGlobalSettings() {
 		return globalSettings;
 	}
