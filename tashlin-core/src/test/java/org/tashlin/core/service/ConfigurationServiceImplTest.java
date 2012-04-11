@@ -7,11 +7,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -32,21 +35,27 @@ public class ConfigurationServiceImplTest {
 	private ConfigurationBuilder configurationBuilder;
 	private GlobalSettingsBuilder globalSettingsBuilder;
 	private JobDefinitionBuilder jobDefinitionBuilder;
+	private File configFile;
+	@Mock private FileSystemService fileSystemService;
 	@Mock private ConfigurationDao configurationDao;
+	@Rule public TemporaryFolder temporaryFolder = new TemporaryFolder();
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		service = new ConfigurationServiceImpl();
 		configurationBuilder = new ConfigurationBuilder();
 		globalSettingsBuilder = new GlobalSettingsBuilder();
 		jobDefinitionBuilder = new JobDefinitionBuilder();
+		configFile = temporaryFolder.newFile("config.xml");
+		ReflectionTestUtils.setField(service, "fileSystemService", fileSystemService);
 		ReflectionTestUtils.setField(service, "configurationDao", configurationDao);
+		when(fileSystemService.getConfigFile()).thenReturn(configFile);
 	}
 	
 	@Test
 	public void testGetJob() throws IOException {
 		Configuration configuration = configurationBuilder.mock().build();
-		when(configurationDao.getConfiguration()).thenReturn(configuration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(configuration);
 		JobDefinition jobDefinition = new JobDefinitionBuilder().mock().build();
 		assertEquals(jobDefinition, service.getJob("tashlin-build"));
 	}
@@ -54,23 +63,23 @@ public class ConfigurationServiceImplTest {
 	@Test
 	public void testGetJobAndKeepConfigurationInCache() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
-		when(configurationDao.getConfiguration()).thenReturn(configuration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(configuration);
 		service.getJob("tashlin-build");
 		service.getJob("tashlin-build");
-		verify(configurationDao).getConfiguration();
+		verify(configurationDao).getConfiguration(configFile);
 		verifyNoMoreInteractions(configurationDao);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetJobCannotRetrieveFromDao() throws Exception {
-		doThrow(new IOException()).when(configurationDao).getConfiguration();
+		doThrow(new IOException()).when(configurationDao).getConfiguration(configFile);
 		service.getJob("tashlin-build");
 	}
 	
 	@Test
 	public void testGetJobs() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
-		when(configurationDao.getConfiguration()).thenReturn(configuration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(configuration);
 		List<JobDefinition> jobs = service.getJobs();
 		assertEquals(jobDefinitionBuilder.mock().build(), jobs.get(0));
 		assertEquals(jobDefinitionBuilder.mock().withKey("tashlin-integration").withName("tashlin-integration").build(), jobs.get(1));
@@ -80,52 +89,52 @@ public class ConfigurationServiceImplTest {
 	public void testGetJobsReturnsNull() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
 		configuration.setJobs(null);
-		when(configurationDao.getConfiguration()).thenReturn(configuration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(configuration);
 		assertNull(service.getJobs());
 	}
 	
 	@Test
 	public void testGetJobsAndKeepConfigurationInCache() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
-		when(configurationDao.getConfiguration()).thenReturn(configuration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(configuration);
 		service.getJobs();
 		service.getJobs();
-		verify(configurationDao).getConfiguration();
+		verify(configurationDao).getConfiguration(configFile);
 		verifyNoMoreInteractions(configurationDao);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetJobsCannotRetrieveFromDao() throws Exception {
-		doThrow(new IOException()).when(configurationDao).getConfiguration();
+		doThrow(new IOException()).when(configurationDao).getConfiguration(configFile);
 		service.getJobs();
 	}
 	
 	@Test
 	public void testGetGlobalSettings() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
-		when(configurationDao.getConfiguration()).thenReturn(configuration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(configuration);
 		assertEquals(configuration.getGlobalSettings(), service.getGlobalSettings());
 	}
 	
 	@Test
 	public void testGetGlobalSettingsAndKeepConfigurationInCache() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
-		when(configurationDao.getConfiguration()).thenReturn(configuration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(configuration);
 		service.getGlobalSettings();
 		service.getGlobalSettings();
-		verify(configurationDao).getConfiguration();
+		verify(configurationDao).getConfiguration(configFile);
 		verifyNoMoreInteractions(configurationDao);
 	}
 	
 	@Test
 	public void testSaveGlobalSettings() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
-		when(configurationDao.getConfiguration()).thenReturn(configuration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(configuration);
 		GlobalSettings globalSettings = globalSettingsBuilder.mock().build();
 		configuration.setGlobalSettings(null);
 		service.save(globalSettings);
 		assertEquals(globalSettings, configuration.getGlobalSettings());
-		verify(configurationDao).save(configuration);
+		verify(configurationDao).save(configFile, configuration);
 	}
 	
 	@Test
@@ -134,26 +143,26 @@ public class ConfigurationServiceImplTest {
 		Configuration cachedConfiguration = configurationBuilder.mock().build();
 		cachedConfiguration.setJobs(null);
 		Configuration newConfiguration = configurationBuilder.mock().withJob(job).build();
-		when(configurationDao.getConfiguration()).thenReturn(cachedConfiguration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(cachedConfiguration);
 		service.save(job);
-		verify(configurationDao).save(newConfiguration);
+		verify(configurationDao).save(configFile, newConfiguration);
 	}
 	
 	@Test
 	public void testDeleteJob() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
-		when(configurationDao.getConfiguration()).thenReturn(configuration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(configuration);
 		service.delete("tashlin-build");
 		assertNull(configuration.getJobs().get("tashlin-build"));
-		verify(configurationDao).save(configuration);
+		verify(configurationDao).save(configFile, configuration);
 	}
 	
 	@Test
 	public void testDeleteJobThatDoesntExist() throws Exception {
 		Configuration configuration = configurationBuilder.mock().build();
-		when(configurationDao.getConfiguration()).thenReturn(configuration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(configuration);
 		service.delete("tashlin-unexist");
-		verify(configurationDao).save(configuration);
+		verify(configurationDao).save(configFile, configuration);
 	}
 	
 	@Test
@@ -161,7 +170,7 @@ public class ConfigurationServiceImplTest {
 		Configuration configuration = configurationBuilder.mock().build();
 		Configuration reloadedConfiguration = configurationBuilder.mock().build();
 		reloadedConfiguration.getGlobalSettings().getColors().setSuccess("#000000");
-		when(configurationDao.getConfiguration()).thenReturn(configuration, reloadedConfiguration);
+		when(configurationDao.getConfiguration(configFile)).thenReturn(configuration, reloadedConfiguration);
 		assertEquals(configuration.getGlobalSettings(), service.getGlobalSettings());
 		service.loadConfiguration();
 		assertEquals(reloadedConfiguration.getGlobalSettings(), service.getGlobalSettings());

@@ -3,6 +3,7 @@ package org.tashlin.web;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.ui.ExtendedModelMap;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.tashlin.core.builder.JobDefinitionBuilder;
 import org.tashlin.core.model.JobDefinition;
 import org.tashlin.core.service.JobService;
@@ -25,13 +29,16 @@ public class JobControllerTest {
 
 	private JobController controller;
 	private MockHttpServletRequest request;
+	private Model model;
 	private JobDefinitionBuilder jobDefinitionBuilder;
 	@Mock private JobService jobService;
+	@Mock private BindingResult bindingResult;
 	
 	@Before
 	public void setUp() {
 		controller = new JobController();
 		request = new MockHttpServletRequest();
+		model = new ExtendedModelMap();
 		jobDefinitionBuilder = new JobDefinitionBuilder();
 		ReflectionTestUtils.setField(controller, "jobService", jobService);
 	}
@@ -74,21 +81,30 @@ public class JobControllerTest {
 	
 	@Test
 	public void testAddJob() {
-		assertEquals(".job.add", controller.addJob(request));
-		assertEquals(new JobDefinition(), request.getAttribute("job"));
+		assertEquals(".job.add", controller.addJob(model));
+		assertEquals(new JobDefinition(), model.asMap().get("jobDefinition"));
 	}
 	
 	@Test
 	public void testSaveJob() {
+		when(bindingResult.hasErrors()).thenReturn(false);
 		JobDefinition job = jobDefinitionBuilder.mock().build();
-		assertEquals("/jobs", controller.saveJob(job).getUrl());
+		assertEquals("redirect:/jobs", controller.saveJob(job, bindingResult));
 		verify(jobService).save(job);
 	}
 	
 	@Test
+	public void testSaveJobWithErrors() {
+		when(bindingResult.hasErrors()).thenReturn(true);
+		JobDefinition job = jobDefinitionBuilder.mock().build();
+		assertEquals(".job.add", controller.saveJob(job, bindingResult));
+		verifyZeroInteractions(jobService);
+	}
+	
+	@Test
 	public void testDeleteJob() {
-		assertEquals("/jobs", controller.deleteJob("tashlin-build").getUrl());
-		verify(jobService).delete("tashlin-build");
+		assertEquals("redirect:/jobs", controller.deleteJob("tashlin-build"));
+		//verify(jobService).delete("tashlin-build");
 	}
 	
 }

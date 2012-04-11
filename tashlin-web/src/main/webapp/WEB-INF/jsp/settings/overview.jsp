@@ -6,26 +6,14 @@
 <form:form commandName="globalSettings" cssClass="form-horizontal">
         <fieldset>
           <div class="control-group">
-            <label for="input01" class="control-label"><spring:message code="settings.mavenHome.label" /></label>
+            <label for="mavenHome" class="control-label"><spring:message code="settings.mavenHome.label" /></label>
             <div class="controls">
             	<form:input path="mavenHome" cssClass="input-xlarge" />
-            </div>
-          </div>
-          <div class="control-group">
-            <label for="input01" class="control-label"><spring:message code="settings.mavenHome.label" /></label>
-            <div class="controls">
-            	<form:input path="mavenHome" cssClass="input-xlarge" />
-            </div>
-          </div>
-          <div class="control-group">
-            <label for="input01" class="control-label"><spring:message code="settings.mavenHome.label" /></label>
-            <div class="controls">
-            	<form:input path="mavenHome" cssClass="input-xlarge" />
+            	<form:errors path="mavenHome" cssClass="error" />
             </div>
           </div>
           <div class="form-actions">
             <button class="btn btn-primary" type="submit"><spring:message code="button.save" /></button>
-            <button class="btn">Cancel</button>
           </div>
         </fieldset>
 </form:form>

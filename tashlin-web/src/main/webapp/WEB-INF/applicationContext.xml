@@ -14,12 +14,4 @@
 		<property name="location" value="classpath:application.properties" />
 	</bean>
 
-	<bean id="xmlConfig" class="java.io.File">
-		<constructor-arg value="${tashlin.root}/config.xml"/>
-	</bean>
-	
-	<bean id="rootFolder" class="java.io.File">
-		<constructor-arg value="${tashlin.root}"/>
-	</bean>
-
 </beans>

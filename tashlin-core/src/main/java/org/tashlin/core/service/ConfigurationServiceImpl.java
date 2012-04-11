@@ -1,5 +1,6 @@
 package org.tashlin.core.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -17,6 +18,7 @@ import org.tashlin.core.model.JobDefinition;
 public class ConfigurationServiceImpl implements ConfigurationService {
 	
 	private Configuration configuration;
+	@Autowired private FileSystemService fileSystemService;
 	@Autowired private ConfigurationDao configurationDao;
 	
 	public JobDefinition getJob(String name) {
@@ -54,7 +56,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	
 	private void save(Configuration configuration) {
 		try {
-			configurationDao.save(configuration);
+			File configFile = fileSystemService.getConfigFile();
+			configurationDao.save(configFile, configuration);
 		} catch (IOException e) {
 			throw new ServiceException();
 		}
@@ -74,7 +77,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
 	public void loadConfiguration() {
 		try {
-			this.configuration = configurationDao.getConfiguration();
+			File configFile = fileSystemService.getConfigFile();
+			this.configuration = configurationDao.getConfiguration(configFile);
 		} catch(IOException e) {
 			throw new ServiceException();
 		}

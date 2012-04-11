@@ -1,1 +1,30 @@
-<tashlin />
+<tashlin>
+  <globalSettings>
+  	<mavenHome>D:/DEV/maven/bin</mavenHome>
+  	<colors>
+  		<success>#5EB95E</success>
+  		<failed>#DD514C</failed>
+  		<unknown>#DDDDDD</unknown>
+  	</colors>
+  </globalSettings>
+  <jobs class="linked-hash-map">
+    <entry>
+      <string>tashlin-build</string>
+      <job>
+      	<key>tashlin-build</key>
+      	<lastBuildNr>4</lastBuildNr>
+        <name>tashlin-build</name>
+        <cronSchedule>0 * * * *</cronSchedule>
+      </job>
+    </entry>
+    <entry>
+      <string>tashlin-integration</string>
+      <job>
+        <key>tashlin-integration</key>
+        <lastBuildNr>4</lastBuildNr>
+        <name>tashlin-integration</name>
+        <cronSchedule>0 * * * *</cronSchedule>
+      </job>
+    </entry>
+  </jobs>
+</tashlin>

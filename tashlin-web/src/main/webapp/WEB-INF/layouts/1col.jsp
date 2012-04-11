@@ -12,6 +12,7 @@
 	<title><spring:message code="${title}" /> - Tashlin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/tashlin.css" />" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;

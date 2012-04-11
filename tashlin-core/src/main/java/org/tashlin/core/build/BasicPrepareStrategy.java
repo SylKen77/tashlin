@@ -3,7 +3,6 @@ package org.tashlin.core.build;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.tashlin.core.model.JobDefinition;
 
 public class BasicPrepareStrategy implements PrepareStrategy {

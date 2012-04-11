@@ -1,4 +1,4 @@
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 configure(rootProject) {
 
@@ -17,7 +17,7 @@ subprojects {
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 
-	springVersion = '3.1.1.RELEASE'
+	springVersion = '3.1.0.RELEASE'
 	commonsLangVersion = '2.6'
 	
 	repositories {
@@ -85,13 +85,12 @@ project('tashlin-web') {
 		compile "org.springframework:spring-webmvc:${springVersion}"
 		compile "org.apache.tiles:tiles-jsp:2.2.2"
 		compile "org.codehaus.jackson:jackson-mapper-asl:1.6.4"
-		compile "javax.servlet:servlet-api:2.5"
 		compile "javax.validation:validation-api:1.0.0.GA"
-		providedCompile "javax.servlet:servlet-api:2.5"
+		providedCompile "javax.servlet:servlet-api:3.0-alpha-1"
 		testCompile "org.springframework:spring-test:${springVersion}"
 		testCompile project(':tashlin-core').sourceSets.test.output
 	}
 	
-	httpPort = 8081
+	httpPort = 8085
 		
 }

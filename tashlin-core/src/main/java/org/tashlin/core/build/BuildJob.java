@@ -7,7 +7,6 @@ import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.tashlin.core.model.GlobalSettings;
 import org.tashlin.core.model.JobDefinition;
 
 public class BuildJob implements Job {
