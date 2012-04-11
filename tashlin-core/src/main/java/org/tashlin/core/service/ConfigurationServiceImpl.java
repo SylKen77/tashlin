@@ -80,7 +80,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 			File configFile = fileSystemService.getConfigFile();
 			this.configuration = configurationDao.getConfiguration(configFile);
 		} catch(IOException e) {
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 
