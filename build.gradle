@@ -31,12 +31,6 @@ subprojects {
 	
 }
 
-project('tashlin-test') {
-	dependencies {
-		 testCompile "org.springframework:spring-test:${springVersion}"
-	}
-}
-
 project('tashlin-standalone') {
 	jar {
 		from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
